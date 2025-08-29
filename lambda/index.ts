@@ -48,12 +48,7 @@ app.get("/publish", async (c) => {
   const vars = getEnv(c);
   const auth = new google.auth.GoogleAuth({
     credentials: {
-      // IMPORTANT!! have to have key stored in Base64 because of the
-      // weirdness of node handling spaces in the key
-      private_key: Buffer.from(
-        vars.LINGDOCS_SERVICE_ACCOUNT_KEY,
-        "base64",
-      ).toString("ascii"),
+      private_key: vars.LINGDOCS_SERVICE_ACCOUNT_KEY,
       client_email: vars.LINGDOCS_SERVICE_ACCOUNT_EMAIL,
     },
     scopes: [
