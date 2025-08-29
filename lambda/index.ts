@@ -3,7 +3,7 @@ import { handle } from "hono/aws-lambda";
 // wish we could tree shake this!
 import { google } from "googleapis";
 import { sheets } from "@googleapis/sheets";
-import { getEntriesFromSheet } from "../lib/spreadsheet-tools";
+import { getEntriesFromSheet } from "@lingdocs/auth-shared";
 import {
   checkForErrors,
   dictionaryFilename,
