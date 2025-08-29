@@ -1,5 +1,5 @@
 {
-  "app": "npx ts-node --prefer-ts-exts bin/functions.ts",
+  "app": "node bin/functions.js",
   "watch": {
     "include": [
       "**"

@@ -12,6 +12,7 @@ lerna-debug.log*
 
 /dist
 bin/functions.js
+cdk.out
 
 node_modules
 .yarn
