@@ -22,7 +22,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.879.0",
     "@googleapis/sheets": "^11.1.0",
-    "@lingdocs/auth-shared": "^0.4.0",
+    "@lingdocs/auth-shared": "^0.4.2",
     "@lingdocs/pashto-inflector": "^9.0.6",
     "aws-cdk-lib": "2.213.0",
     "constructs": "^10.4.2",
