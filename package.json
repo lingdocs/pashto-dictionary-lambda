@@ -28,6 +28,6 @@
     "constructs": "^10.4.2",
     "google-auth-library": "^10.3.0",
     "googleapis": "^159.0.0",
-    "hono": "^4.9.5"
+    "hono": "^4.9.6"
   }
 }
