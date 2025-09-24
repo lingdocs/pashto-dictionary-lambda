@@ -34,6 +34,7 @@ app.get("/publish", async (c) => {
       error: "unauthorized",
     });
   }
+  console.log("Will fetch user for auth");
   // TODO: use getUser from auth-shared
   const r = await fetch("https://account.lingdocs.com/api/user", {
     headers: { Cookie: cookie },
@@ -45,7 +46,9 @@ app.get("/publish", async (c) => {
       error: "unauthorized",
     });
   }
+  console.log({ user });
   const vars = getEnv(c);
+  console.log({ vars });
   const auth = new google.auth.GoogleAuth({
     credentials: {
       private_key: vars.LINGDOCS_SERVICE_ACCOUNT_KEY,
@@ -64,6 +67,7 @@ app.get("/publish", async (c) => {
     spreadsheets,
     spreadsheetId: vars.LINGDOCS_DICTIONARY_SPREADSHEET,
   });
+  console.log("Got entries", entries[0]);
   const errors = checkForErrors(entries);
   if (errors.length) {
     return c.json({
