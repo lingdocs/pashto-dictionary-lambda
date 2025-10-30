@@ -35,10 +35,12 @@ app.get("/publish", async (c) => {
       error: "unauthorized",
     });
   }
+  console.log({ cookie });
   // TODO: use getUser from auth-shared
   const r = await fetch("https://account.lingdocs.com/api/user", {
     headers: { Cookie: cookie },
   });
+  console.log({ r });
   const { ok, user } = await r.json();
   console.log({ user });
   if (ok !== true || typeof user !== "object" || !user.admin) {
