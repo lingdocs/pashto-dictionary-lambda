@@ -24,6 +24,7 @@ app.use(
   cors({ origin: ["https://dictionary.lingdocs.com"], credentials: true }),
 );
 app.get("/publish", async (c) => {
+  console.log("in publish function");
   // check if caller is authorized as lingdocs admin
   // might be nicer to abstract this into some middleware
   const cookie = c.req.header("cookie");
@@ -39,6 +40,7 @@ app.get("/publish", async (c) => {
     headers: { Cookie: cookie },
   });
   const { ok, user } = await r.json();
+  console.log({ user });
   if (ok !== true || typeof user !== "object" || !user.admin) {
     return c.json({
       ok: false,
@@ -56,14 +58,17 @@ app.get("/publish", async (c) => {
       "https://www.googleapis.com/auth/drive.file",
     ],
   });
+  console.log({ auth });
   const { spreadsheets } = sheets({
     version: "v4",
     auth,
   });
+  console.log({ spreadsheets });
   const entries = await getEntriesFromSheet({
     spreadsheets,
     spreadsheetId: vars.LINGDOCS_DICTIONARY_SPREADSHEET,
   });
+  console.log({ entries });
   const errors = checkForErrors(entries);
   if (errors.length) {
     return c.json({
