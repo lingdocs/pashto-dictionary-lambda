@@ -26,6 +26,7 @@ app.use(
 app.get("/publish", async (c) => {
   // check if caller is authorized as lingdocs admin
   // might be nicer to abstract this into some middleware
+  console.log("will publish");
   const cookie = c.req.header("cookie");
   if (!cookie) {
     c.status(401);
@@ -39,6 +40,7 @@ app.get("/publish", async (c) => {
     headers: { Cookie: cookie },
   });
   const { ok, user } = await r.json();
+  console.log("got user");
   if (ok !== true || typeof user !== "object" || !user.admin) {
     return c.json({
       ok: false,
@@ -64,16 +66,19 @@ app.get("/publish", async (c) => {
     spreadsheets,
     spreadsheetId: vars.LINGDOCS_DICTIONARY_SPREADSHEET,
   });
-  console.log({ entries });
+  console.log("Got entries");
   const errors = checkForErrors(entries);
+  console.log("Checked errors");
   if (errors.length) {
     return c.json({
       ok: false,
       errors,
     });
   }
+  console.log("will make");
   const dictionary = makeDictionaryObject(entries);
   const sitemap = makeSitemap(dictionary);
+  console.log("made");
   // const wordListRes = getWordList(dictionary.entries);
   // if (!wordListRes.ok) {
   //   return c.json({
